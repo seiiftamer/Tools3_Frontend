@@ -5,15 +5,19 @@ import "../styles.css"; // Ensure this line is correct
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+
+  function testNavigation(){
+    navigate("/order");
+  }
   // const navigate = useNavigate();return <> hot ela ayzo   </>; => we r using <></> fragment to insert a lot of elements in render
   return <>
 
     <div className="App">
-      <h1>Welcome to our project</h1>
+    <h1>Welcome to our project</h1>
     <Login />
     </div>
   </>;
 };
-
 //<CreateOrderPage/>
+//<button onClick={testNavigation}>login </button>
 export default LoginPage;

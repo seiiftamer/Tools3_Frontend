@@ -27,6 +27,8 @@ const Login = () => {
       });
       console.log('Login successful:', response.data);
       setMessage('Login successful!');
+      const token = response.data.token;
+      localStorage.setItem('authToken', token);
       setFormData({ email: '', password: '' });
       
       // Navigate to Create Order page after successful login
@@ -36,6 +38,9 @@ const Login = () => {
       setMessage('Login failed. Please check your credentials.');
     }
   };
+  function testNavigation(){
+    navigate("/order");
+  }
 
   return (
     <div>
@@ -61,7 +66,8 @@ const Login = () => {
             required
           />
         </div>
-        <button type="submit" id="ziad">Login</button>
+       
+        <button onClick={testNavigation}>login </button>
       </form>
       {message && <p>{message}</p>}
     </div>

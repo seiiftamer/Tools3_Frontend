@@ -1,52 +1,56 @@
-/*import React, { useEffect, useState } from 'react';
+// src/OrderDetails.js
+import axios from 'axios';
+import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const OrderDetails = ({ orderId }) => {
-    const [order, setOrder] = useState(null);
-    const [loading, setLoading] = useState(true);
+const OrderDetails = () => {
+  const location = useLocation();
+  const { order } = location.state || {}; // Access the order object from state
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // Fetch order details based on orderId
-        fetch(/api/orders/${orderId})
-            .then(response => response.json())
-            .then(data => {
-                setOrder(data);
-                setLoading(false);
-            })
-            .catch(error => console.error('Error fetching order details:', error));
-    }, [orderId]);
+  // If no order data is passed, you can render an error message or redirect
+  if (!order) {
+    return <p>No order details found.</p>;
+  }
 
-    const handleCancelOrder = () => {
-        // Check if order is pending and can be canceled
-        if (order.status === 'Pending') {
-            fetch(/api/orders/${orderId}/cancel, { method: 'POST' })
-                .then(response => response.json())
-                .then(data => {
-                    alert('Order canceled successfully');
-                    setOrder({ ...order, status: 'Canceled' });
-                })
-                .catch(error => console.error('Error canceling order:', error));
-        } else {
-            alert('Order cannot be canceled');
-        }
-    };
+  const cancelOrder =  async() => {
+    const token = localStorage.getItem('authToken');
+    try {
+      const response = await axios.post("http://localhost:4000/order/cancelOrder", {id: order.id},{
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in header
+        },
+      });
+      if (response.data.status === "success") {
+        alert('Order cancelled successfully.');
+        navigate('/display'); // Redirect back to My Orders page after cancellation
+      } else {
+        alert(response.data.message || 'Failed to cancel order.');
+      }
+      console.log('Fetched orders:', response.data); // Debug log
 
-    if (loading) return <p>Loading order details...</p>;
+      // Access orders in response.data.data
+      //setOrders(Array.isArray(response.data.data) ? response.data.data : []);
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+     // setOrders([]); // Set an empty array if there's an error
+    }
+  }
 
-    return (
-        <div>
-            <h2>Order Details</h2>
-            <p><strong>Order ID:</strong> {order.id}</p>
-            <p><strong>Pickup Location:</strong> {order.pickupLocation}</p>
-            <p><strong>Delivery Location:</strong> {order.deliveryLocation}</p>
-            <p><strong>Package Details:</strong> {order.packageDetails}</p>
-            <p><strong>Courier Info:</strong> {order.courierInfo}</p>
-            <p><strong>Status:</strong> {order.status}</p>
-
-            {order.status === 'Pending' && (
-                <button onClick={handleCancelOrder}>Cancel Order</button>
-            )}
-        </div>
-    );
+  return (
+    <div>
+      <h2>Order Details</h2>
+      <p><strong>Order ID:</strong> {order.id}</p>
+      <p><strong>Pickup Location:</strong> {order.pickUpLocation}</p>
+      <p><strong>Drop-off Location:</strong> {order.dropOffLocation}</p>
+      <p><strong>Package Details:</strong> {order.packageDetails}</p>
+      <p><strong>Delivery Date:</strong> {new Date(order.deliveryTime).toLocaleDateString()}</p>
+      <p><strong>Status:</strong> {order.orderStatus}</p>
+      <button onClick={cancelOrder} style={{ marginTop: '20px', color: 'white', backgroundColor: 'red' }}>
+        Cancel Order
+      </button>
+    </div>
+  );
 };
 
-export default OrderDetails; */
+export default OrderDetails;
