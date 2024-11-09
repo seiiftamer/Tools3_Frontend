@@ -2,7 +2,7 @@ import React from "react";
 import "../styles.css";
 import CreateOrder from "../compnents/CreateOrder";
 import { useNavigate } from "react-router-dom";
-export const order = () => {
+export const Order = () => {
   const navigate = useNavigate();
   return (
     <div className="App">
@@ -21,4 +21,4 @@ export const order = () => {
     </div>
   );
 };
-export default order;
+export default Order;
