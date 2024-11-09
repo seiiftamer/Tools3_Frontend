@@ -1,17 +1,24 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import SignUp from "./pages/signup";
-import LoginPage from "./pages/login-page";
+import SignUp from "./pages/Admin-signup";
 import Order from "./pages/create-order-page";
 import { Home } from "./Home";
 import Select from "./pages/order-page-button";
 import Details from "./pages/order-details";
 import Display from "./pages/order-display-page";
+import UserSignUp from "./pages/User-signup";
+import CourierSignUp from "./pages/Courier-signup";
+import Adminlogin from "./pages/Admin-login";
+import Userlogin from "./pages/User-login";
+import Courierlogin from "./pages/Courier-login";
+import CourierOrder from "./pages/Courier-order";
+import Management from "./pages/Admin-manage-page";
+import CourierDetailsPage from "./pages/Courier-details";
 
 export const routes = createBrowserRouter([
     {
       path: "", //localhost:3000
-      element: <Home />,
+      element: <Home/>,
       children: [
         {
           path: "",
@@ -20,12 +27,32 @@ export const routes = createBrowserRouter([
         {
           children: [
             {
-              path: "/signup",
+              path: "/Adminsignup",
               element: <SignUp />,
             },
             {
-              path: "/login" ,
-              element: <LoginPage />,
+              path: "/usersignUp" ,
+              element: <UserSignUp/>,
+            },
+            {
+              path: "/CourierSignUp" ,
+              element: <CourierSignUp/>,
+            },
+            {
+              path: "/Adminlogin" ,
+              element: <Adminlogin />,
+            },
+            {
+              path: "/Userlogin" ,
+              element: <Userlogin/>,
+            },
+            {
+              path: "/Courierlogin" ,
+              element: < Courierlogin/>,
+            },
+            {
+              path: "/adminDisplay" ,
+              element: <Management/>,
             },
             {
               path: "/order" ,
@@ -42,6 +69,14 @@ export const routes = createBrowserRouter([
             {
               path: "/vieworder" ,
               element: <Details/>,
+            },
+            {
+              path: "/courierOrder" ,
+              element: <CourierOrder/>,
+            },
+            {
+              path: "/courierOrderDetails" ,
+              element: <CourierDetailsPage/>,
             },
           ],
         },

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -20,27 +20,27 @@ const Login = () => {
     console.log("TEST", formData);
 
     try {
-      const response = await axios.post("http://localhost:4000/admin/login", {
+      const response = await axios.post("http://localhost:4000/courier/login", {
         email: formData.email,
         password: formData.password,
       });
-      console.log("Login successful:", response.data);
+      console.log('Login successful:', response.data);
 
       const token = response.data.token;
-      localStorage.setItem("authToken", token);
+      localStorage.setItem('authToken', token);
       localStorage.setItem("name", response.data.data.name);
-      setFormData({ email: "", password: "" });
-
-      navigate("/adminDisplay");
+      setFormData({ email: '', password: '' });
+      
+      navigate('/courierOrder');
     } catch (error) {
-      console.error("Login error:", error);
-      setMessage("Login failed. Please check your credentials.");
+      console.error('Login error:', error);
+      setMessage('Login failed. Please check your credentials.');
     }
   };
 
   return (
     <div>
-      <h2>Admin Login</h2>
+      <h2>Courier Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>
@@ -62,8 +62,8 @@ const Login = () => {
             required
           />
         </div>
-
-        <button type="submit">login </button>
+       
+        <button type='submit'>login </button>
       </form>
       {message && <p>{message}</p>}
     </div>

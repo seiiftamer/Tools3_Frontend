@@ -20,10 +20,13 @@ const Login = () => {
     console.log("TEST", formData);
 
     try {
-      const response = await axios.post("http://localhost:4000/admin/login", {
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/login",
+        {
+          email: formData.email,
+          password: formData.password,
+        }
+      );
       console.log("Login successful:", response.data);
 
       const token = response.data.token;
@@ -31,7 +34,7 @@ const Login = () => {
       localStorage.setItem("name", response.data.data.name);
       setFormData({ email: "", password: "" });
 
-      navigate("/adminDisplay");
+      navigate("/order");
     } catch (error) {
       console.error("Login error:", error);
       setMessage("Login failed. Please check your credentials.");
@@ -40,7 +43,7 @@ const Login = () => {
 
   return (
     <div>
-      <h2>Admin Login</h2>
+      <h2>User Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Email:</label>

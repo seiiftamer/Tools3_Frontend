@@ -1,29 +1,33 @@
-// src/App.js
-import React from 'react';
-
-
-import '../styles.css'; // Ensure this line is correct
-import CreateOrder from '../compnents/CreateOrder';
-import { useNavigate } from 'react-router-dom';
-
-
- export const Select = () => {
-    const navigate= useNavigate();
-  function createorderNavigation(){
+import React from "react";
+import "../styles.css";
+import { useNavigate } from "react-router-dom";
+export const Select = () => {
+  const navigate = useNavigate();
+  const name = localStorage.getItem("name");
+  function createorderNavigation() {
     navigate("/createorder");
   }
-  function viewordersNavigation(){
+  function viewordersNavigation() {
     navigate("/display");
   }
   return (
     <div className="App">
-    <h1> Orders </h1>
-    <button onClick={createorderNavigation}>create order </button>
-    <button onClick={viewordersNavigation}>view my orders </button>
-  </div>
+      <p>Welcome {name ? name : "Guest"}!</p>
+      <h1> Orders </h1>
+      <button onClick={createorderNavigation}>Create Order </button>
+      <button onClick={viewordersNavigation}>View My Orders </button>
+      <button
+        onClick={() => navigate("/")}
+        style={{
+          width: 100,
+          marginTop: "20px",
+          color: "white",
+          backgroundColor: "red",
+        }}
+      >
+        Log Out
+      </button>
+    </div>
   );
 };
-
-//<Login />
-//<CreateOrderPage/>
 export default Select;

@@ -1,8 +1,7 @@
-// src/Registration.js
 import React, { useState } from "react";
 import axios from "axios";
 
-const Registration = () => {
+const UserRegistration = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,11 +20,15 @@ const Registration = () => {
     e.preventDefault();
     console.log("TEST", formData);
     try {
-      const response = await axios.post("http://localhost:4000/admin/signup", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/signup",
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }
+      );
       console.log("Registration successful:", response.data);
       setMessage("Sign Up successful!");
       setFormData({ name: "", email: "", phone: "", password: "" });
@@ -37,7 +40,7 @@ const Registration = () => {
 
   return (
     <div>
-      <h2>Admin Registration</h2>
+      <h2>User Registration</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name:</label>
@@ -86,4 +89,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default UserRegistration;

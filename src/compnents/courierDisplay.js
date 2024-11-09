@@ -1,8 +1,9 @@
+// src/MyOrders.js
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const MyOrders = () => {
+const CourierOrders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -12,10 +13,10 @@ const MyOrders = () => {
       const token = localStorage.getItem("authToken");
       try {
         const response = await axios.get(
-          "http://localhost:4000/order/getByUser",
+          "http://localhost:4000/courier/getOrders",
           {
             headers: {
-              Authorization: `Bearer ${token}`, 
+              Authorization: `Bearer ${token}`,
             },
           }
         );
@@ -24,7 +25,7 @@ const MyOrders = () => {
         setOrders(Array.isArray(response.data.data) ? response.data.data : []);
       } catch (error) {
         console.error("Error fetching orders:", error);
-        setOrders([]); 
+        setOrders([]);
       } finally {
         setLoading(false);
       }
@@ -40,12 +41,13 @@ const MyOrders = () => {
       packageDetails: order.packageDetails,
       deliveryTime: order.deliveryTime,
       orderStatus: order.orderStatus,
+      courierName: order.courier.name,
     };
 
-    navigate(`/vieworder`, { state: { order: orderDetails } });
+    navigate(`/courierOrderDetails`, { state: { order: orderDetails } });
   };
+
   return (
-    
     <div className="my-orders-page">
       <h2>My Orders</h2>
       {loading ? (
@@ -71,4 +73,4 @@ const MyOrders = () => {
   );
 };
 
-export default MyOrders;
+export default CourierOrders;

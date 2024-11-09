@@ -1,12 +1,13 @@
 import React from "react";
 import "../styles.css";
-import CreateOrder from "../compnents/CreateOrder";
 import { useNavigate } from "react-router-dom";
-export const order = () => {
+import CourierDetails from "../compnents/courierDetails.js";
+export const CourierDetailsPage = () => {
   const navigate = useNavigate();
+  const name = localStorage.getItem("name");
   return (
     <div className="App">
-      <CreateOrder />
+      <CourierDetails />
       <button
         onClick={() => navigate("/")}
         style={{
@@ -21,4 +22,5 @@ export const order = () => {
     </div>
   );
 };
-export default order;
+
+export default CourierDetailsPage;
