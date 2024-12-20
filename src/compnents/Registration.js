@@ -21,7 +21,7 @@ const Registration = () => {
     e.preventDefault();
     console.log("TEST", formData);
     try {
-      const response = await axios.post("http://localhost:4000/admin/signup", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/admin/signup`, {
         name: formData.name,
         email: formData.email,
         password: formData.password,

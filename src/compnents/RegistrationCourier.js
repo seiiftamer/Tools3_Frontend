@@ -22,7 +22,7 @@ const CouierRegistration = () => {
     console.log("TEST", formData);
     try {
       const response = await axios.post(
-        "http://localhost:4000/courier/signup",
+        `${process.env.REACT_APP_BACKEND_URL}/courier/signup`,
         {
           name: formData.name,
           email: formData.email,

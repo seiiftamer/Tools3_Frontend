@@ -11,7 +11,7 @@ const AssignedOrders = () => {
       const token = localStorage.getItem("authToken");
       try {
         const response = await axios.get(
-          "http://localhost:4000/orders/assigned",
+          `${process.env.REACT_APP_BACKEND_URL}/orders/assigned`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -32,7 +32,7 @@ const AssignedOrders = () => {
   const handleAccept = async (orderId) => {
     try {
       await axios.post(
-        `http://localhost:4000/orders/${orderId}/accept`,
+        `${process.env.REACT_APP_BACKEND_URL}/${orderId}/accept`,
         {},
         {
           headers: {
@@ -53,7 +53,7 @@ const AssignedOrders = () => {
   const handleDecline = async (orderId) => {
     try {
       await axios.post(
-        `http://localhost:4000/orders/${orderId}/decline`,
+        `${process.env.REACT_APP_BACKEND_URL}/${orderId}/decline`,
         {},
         {
           headers: {

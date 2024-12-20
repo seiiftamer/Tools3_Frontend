@@ -14,7 +14,7 @@ const ManageOrdersPage = () => {
     try {
       const token = localStorage.getItem("authToken");
       const response = await axios.get(
-        "http://localhost:4000/admin/getAllOrders",
+        `${process.env.REACT_APP_BACKEND_URL}/admin/getAllOrders`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -35,7 +35,7 @@ const ManageOrdersPage = () => {
   const deleteOrder = async (orderId) => {
     try {
       const token = localStorage.getItem("authToken");
-      await axios.delete(`http://localhost:4000/admin/deleteOrder`, {
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/admin/deleteOrder`, {
         data: { id: orderId },
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -51,7 +51,7 @@ const ManageOrdersPage = () => {
     try {
       const token = localStorage.getItem("authToken");
       await axios.put(
-        `http://localhost:4000/admin/orderStatusControl`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/orderStatusControl`,
         {
           id: orderId,
           orderStatus: newStatus,
@@ -84,7 +84,7 @@ const ManageOrdersPage = () => {
       }
 
       await axios.put(
-        `http://localhost:4000/admin/assignOrder`,
+        `${process.env.REACT_APP_BACKEND_URL}/admin/assignOrder`,
         { id: orderId, email: courierEmail },
         {
           headers: {

@@ -15,7 +15,7 @@ const OrderDetails = () => {
     const token = localStorage.getItem("authToken");
     try {
       const response = await axios.put(
-        "http://localhost:4000/order/cancelOrder",
+        `${process.env.REACT_APP_BACKEND_URL}/order/cancelOrder`,
         { id: order.id },
         {
           headers: {

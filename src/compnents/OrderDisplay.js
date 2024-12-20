@@ -12,7 +12,7 @@ const MyOrders = () => {
       const token = localStorage.getItem("authToken");
       try {
         const response = await axios.get(
-          "http://localhost:4000/order/getByUser",
+          `${process.env.REACT_APP_BACKEND_URL}/order/getByUser`,
           {
             headers: {
               Authorization: `Bearer ${token}`, 

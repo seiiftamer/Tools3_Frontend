@@ -13,7 +13,7 @@ const CourierOrders = () => {
       const token = localStorage.getItem("authToken");
       try {
         const response = await axios.get(
-          "http://localhost:4000/courier/getOrders",
+          `${process.env.REACT_APP_BACKEND_URL}/courier/getOrders`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -18,13 +18,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("TEST", formData);
-
     try {
-      const response = await axios.post("https://tools-3-backend-crt-20216081-dev.apps.rm3.7wse.p1.openshiftapps.com/admin/login", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/admin/login`, {
         email: formData.email,
         password: formData.password,
       });
       console.log("Login successful:", response.data);
+      console.log("BACKEND URL: ", process.env.REACT_APP_BACKEND_URL);
 
       const token = response.data.token;
       localStorage.setItem("authToken", token);

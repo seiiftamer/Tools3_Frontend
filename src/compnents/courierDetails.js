@@ -16,7 +16,7 @@ const CourierDetails = () => {
     try {
       const token = localStorage.getItem("authToken");
       await axios.put(
-        `http://localhost:4000/courier/orderAcceptance`,
+        `${process.env.REACT_APP_BACKEND_URL}/courier/orderAcceptance`,
         {
           id: orderId,
           orderStatus: newStatus,

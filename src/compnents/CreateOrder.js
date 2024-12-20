@@ -24,7 +24,7 @@ const CreateOrder = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/order/createOrder",
+        `${process.env.REACT_APP_BACKEND_URL}/order/createOrder`,
         {
           pickUpLocation: orderDetails.pickUpLocation,
           dropOffLocation: orderDetails.dropOffLocation,

@@ -20,7 +20,7 @@ const Login = () => {
     console.log("TEST", formData);
 
     try {
-      const response = await axios.post("http://localhost:4000/courier/login", {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/courier/login`, {
         email: formData.email,
         password: formData.password,
       });
