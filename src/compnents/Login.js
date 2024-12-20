@@ -20,7 +20,7 @@ const Login = () => {
     console.log("TEST", formData);
 
     try {
-      const response = await axios.post("http://localhost:4000/admin/login", {
+      const response = await axios.post("https://tools-3-backend-crt-20216081-dev.apps.rm3.7wse.p1.openshiftapps.com/admin/login", {
         email: formData.email,
         password: formData.password,
       });
